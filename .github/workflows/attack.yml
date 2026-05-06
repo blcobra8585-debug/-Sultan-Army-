@@ -1,4 +1,4 @@
-name: Sultan-Cloud-Strike-V103
+name: Sultan-Supreme-Strike-V104
 
 on:
   push:
@@ -16,13 +16,8 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install Dependencies
-        run: |
-          python -m pip install --upgrade pip
-          # Agar koi extra library chahiye toh yahan add kar sakte ho
-
       - name: Execute Sultan Strike
         run: |
-          # Sabse zaroori line: Bina ../ ke seedha target.txt read karna
-          python3 attack.py $(cat target.txt) 300
-          
+          # Agar file na ho toh error na aaye isliye touch
+          touch target.txt
+          python3 attack.py $(cat target.txt)
